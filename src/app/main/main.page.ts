@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonInput, IonItem, IonButton, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonList } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonInput, IonItem, IonButton, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonList, IonIcon } from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
 import { RecipesService } from '../services/recipes.service';
+import { addIcons } from 'ionicons';
+import { cartOutline } from 'ionicons/icons';
+
+
 
 
 @Component({
@@ -11,7 +15,7 @@ import { RecipesService } from '../services/recipes.service';
   templateUrl: './main.page.html',
   styleUrls: ['./main.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, RouterLink,IonButtons, IonMenuButton, IonInput, IonItem, IonButton, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonList]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, RouterLink,IonButtons, IonMenuButton, IonInput, IonItem, IonButton, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonList, IonIcon]
 })
 
 
@@ -23,8 +27,12 @@ export class MainPage implements OnInit {
   
   recipes: any[] = [];
 
-  constructor(public api:RecipesService) { }
-
+  constructor(public api:RecipesService) {
+    addIcons({
+      'cart-outline': cartOutline
+    });
+   }
+  
 
   search(){
     this.api.getRecipes(this.query).subscribe((result)=>{
