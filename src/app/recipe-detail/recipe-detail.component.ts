@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { RecipesService } from '../services/recipes.service';
 import { CommonModule } from '@angular/common';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonInput, IonItem, IonButton, IonCardContent, IonCardTitle, IonCardHeader, IonCard, IonList, IonBackButton } from '@ionic/angular/standalone';
+import { IngredientsService } from '../services/ingredients.service';
 
 
 
@@ -20,7 +21,8 @@ export class RecipeDetailComponent  implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private recipesService: RecipesService
+    private recipesService: RecipesService,
+    private ingredientsService: IngredientsService
   ) { }
 
   ngOnInit() {
@@ -32,5 +34,10 @@ export class RecipeDetailComponent  implements OnInit {
         console.error('Error fetching recipe:', error);
       });
     }
+
+  }
+
+  addToCart() {
+    this.ingredientsService.addIngredients(this.recipe.ingredientLines);
   }
 }

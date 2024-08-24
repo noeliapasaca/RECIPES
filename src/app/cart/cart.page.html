@@ -13,3 +13,10 @@
       <ion-title size="large">Shopping bag</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-list>
+    <ion-item *ngFor="let ingredient of ingredients | keyvalue">
+      <ion-checkbox slot="start" [(ngModel)]="ingredient.value.checked"></ion-checkbox>
+      <span [class.checked]="ingredient.value.checked">{{ ingredient.key }} ({{ ingredient.value.count }})</span>
+    </ion-item>
+  </ion-list>
+</ion-content>

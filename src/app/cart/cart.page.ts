@@ -1,20 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonBackButton, IonButtons } from '@ionic/angular/standalone';
+import { IngredientsService } from '../services/ingredients.service';
+import { IonicModule } from '@ionic/angular';
+
+
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.page.html',
   styleUrls: ['./cart.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonBackButton, IonButtons]
+  imports: [IonicModule, CommonModule, FormsModule]
 })
 export class CartPage implements OnInit {
+  recipe: any;
 
-  constructor() { }
+  ingredients: { [key: string]: { count: number, checked: boolean } } = {};
+
+  constructor(private ingredientsService: IngredientsService) {}
 
   ngOnInit() {
+    const ingredients = this.ingredientsService.getIngredients();
+    for (const key in ingredients) {
+      if (ingredients.hasOwnProperty(key)) {
+        this.ingredients[key] = { count: ingredients[key], checked: false };
+      }
+    }
   }
-
 }
