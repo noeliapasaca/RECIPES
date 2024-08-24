@@ -28,4 +28,13 @@ export class CartPage implements OnInit {
       }
     }
   }
+
+  clearCart() {
+    this.ingredients = {};
+  }
+
+  isCartEmpty(): boolean {
+    return Object.keys(this.ingredients).length === 0;
+  }
+
 }
