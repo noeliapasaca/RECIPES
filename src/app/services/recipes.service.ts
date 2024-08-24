@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -8,9 +9,9 @@ import { Observable } from 'rxjs';
 })
 export class RecipesService {
 
-  private apiUrl = 'https://api.edamam.com/api/recipes/v2';
-  private appKey = 'd680609f3d8ee94a78c255b90accb69b';
-  private appId = '074535cb';
+  private apiUrl = environment.apiUrl;
+  private appId = environment.apiId;
+  private appKey = environment.apiKey;
   constructor(private http:HttpClient) { }
 
   getRecipes(query: string): Observable<any> {
